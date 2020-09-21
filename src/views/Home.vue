@@ -1,7 +1,7 @@
 <template>
   <div class="card-deck">
     <div class="card" v-for="list in lists" :key="list.id">
-      <NewsCard :title="list.title" :description="list.description" :thumbnailUrl="list.thumbnailUrl" />
+      <NewsCard :id="list.id" :title="list.title" :description="list.description" :thumbnailUrl="list.thumbnailUrl" :created_at="list.created_at" />
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
     try {
 
       // TODO: Remove limit after resolving the CSS issue in the home page
-      const res = await axios.get(`http://localhost:3000/news?_limit=5`)
+      const res = await axios.get(`http://localhost:3000/news?_sort=id&_order=desc&_limit=5`)
 
       this.lists = res.data;
     } catch(e) {
